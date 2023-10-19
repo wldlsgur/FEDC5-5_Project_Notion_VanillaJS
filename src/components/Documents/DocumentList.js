@@ -1,4 +1,6 @@
-export default function DocumentList({ $target, initialState }) {
+import { push } from "../../utils/router.js";
+
+export default function DocumentList({ $target, initialState, onClick }) {
   const $documentList = document.createElement("div");
 
   $documentList.className = "document-list";
@@ -16,8 +18,8 @@ export default function DocumentList({ $target, initialState }) {
       <ul class=${hide ? "hidden" : ""}>
         ${documentList
           .map((doc) => {
-            return `<li data-id=${doc.id}> ${doc.title} </li>
-              ${doc.documents && doc.documents.length > 0 ? this.setDepth(doc.documents) : ""}
+            return `<li data-id=${doc.id}> ${doc.title} <button> + </button> </li>
+              ${doc.documents && doc.documents.length > 0 ? this.setDepth(doc.documents, !this.state.selectedDocument.has(`${doc.id}`)) : ""}
             `;
           })
           .join("")}
@@ -27,12 +29,32 @@ export default function DocumentList({ $target, initialState }) {
   };
 
   this.render = () => {
-    if (this.state.length > 0) {
-      $documentList.innerHTML = this.setDepth(this.state.document);
+    $documentList.innerHTML = "";
+    if (this.state.document && this.state.document.length > 0) {
+      $documentList.innerHTML = this.setDepth(this.state) + `<button name="addButton" id="newPage"> 새 페이지 생성 </button>`;
     } else {
       $documentList.innerHTML = `
-        <span id="emptyPage"> 페이지가 없습니다 :( </span>
+        <button name="addButton" id="newPage"> 새 페이지 생성 </button>
       `;
     }
   };
+
+  $documentList.addEventListener("click", (e) => {
+    const { target } = e;
+    const Untitle = "제목 없음";
+    const $li = target.closest("li");
+    const id = $li?.dataset.id;
+
+    if (target.tagName === "BUTTON") {
+      if ($li) {
+        const { id } = $li.dataset;
+        onClick({ parent: id, title: Untitle });
+      } else {
+        onClick({ parent: null, title: Untitle });
+      }
+    } else if (target.tagName === "LI") {
+      const { id } = $li.dataset;
+      push(`/documents/${id}`);
+    }
+  });
 }

@@ -1,41 +1,24 @@
+import { request } from "../../utils/request.js";
 import DocumentList from "./DocumentList.js";
 
 export default function DocumentBox({ $target }) {
   const $documentBox = document.createElement("div");
+  $documentBox.className = "document-box";
 
   const documentList = new DocumentList({
     $target: $documentBox,
     initialState: [],
+    onClick: async ({ parent, title }) => {
+      await request("/documents", {
+        method: "POST",
+        body: JSON.stringify({ parent, title }),
+      });
+      this.setState();
+    },
   });
-
   this.setState = async () => {
-    const documents = [
-      {
-        id: 1,
-        title: "공부하기",
-        documents: [
-          {
-            id: 2,
-            title: "강의듣기",
-            documents: [
-              {
-                id: 3,
-                title: "바닐라 JS",
-                documents: [],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 4,
-        title: "프로젝트 하기",
-        documents: [],
-      },
-    ];
-
-    documentList.setState(documents);
-    this.render();
+    const documents = await request("/documents");
+    docsList.setState(documents);
   };
 
   this.render = () => {
