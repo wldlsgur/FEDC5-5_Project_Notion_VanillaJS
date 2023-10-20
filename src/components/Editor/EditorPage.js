@@ -18,4 +18,15 @@ export default function EditorPage({ $target, initialState, onEdit }) {
   };
 
   this.render();
+  $editorPage.addEventListener("keyup", (e) => {
+    const { target } = e;
+    const { name } = target;
+    const editedDocument = {
+      ...this.state,
+      [name]: target.value,
+    };
+
+    this.setState(editedDocument);
+    onEdit(editedDocument);
+  });
 }

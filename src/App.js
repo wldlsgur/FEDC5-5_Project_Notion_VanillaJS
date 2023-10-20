@@ -9,24 +9,17 @@ export default function App({ $target }) {
 
   const editorBox = new EditorBox({
     $target,
+    onChange: () => {
+      documentBox.setState();
+    },
   });
 
   this.route = async () => {
-    const { pathname } = window.location;
-    this.render();
-
-    documentBox.setState();
-    if (pathname === "/") {
-      editorBox.setState();
-    } else if (pathname.indexOf("/documents/") === 0) {
+    if (pathname === "/") editorBox.setState();
+    else if (pathname.indexOf("/documents/") === 0) {
       const [, , documentId] = pathname.split("/");
       editorBox.setState({ id: documentId });
     }
-  };
-
-  this.render = () => {
-    docsContainer.render();
-    editorContainer.render();
   };
 
   this.route();
