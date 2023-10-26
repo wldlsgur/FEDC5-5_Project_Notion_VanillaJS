@@ -12,7 +12,7 @@
 }
 
 #side-bar {
-  min-width: 300px;
+  width: 300px;
   padding: 12px 10px;
   display: flex;
   flex-direction: column;
@@ -80,7 +80,8 @@
 #document-list {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 280px;
+  overflow: hidden;
 }
 
 #document-children {

@@ -15,7 +15,7 @@ export const SELECTOR = {
     CHIDREN: "document-children",
     ITEM: "document-item",
     TITLE: "document-title",
-    TITLE_GROUP: "document-item-group",
+    TITLE_GROUP: "document-title-group",
     BUTTON: "document-button",
     EXPAND_BTN: "document-expand-btn",
     ADD_BTN: "document-add-btn",
