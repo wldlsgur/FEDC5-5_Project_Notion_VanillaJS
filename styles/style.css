@@ -3,6 +3,10 @@ body {
   margin: 0;
 }
 
+.hidden {
+  display: none;
+}
+
 li {
   margin: 0.8rem 0;
   font-weight: 400;
@@ -33,10 +37,12 @@ li {
   height: 42rem;
   color: #37352f;
 }
+.button-group {
+  display: inline-block;
+}
 
 [name="addButton"],
 [name="deleteButton"] {
-  display: inline-block;
   border: none;
   cursor: pointer;
   background-color: transparent;
@@ -53,6 +59,14 @@ li {
   padding: 0.5rem 2rem;
   border-radius: 0.5rem;
   font-size: medium;
+}
+
+#emptyPage {
+  position: fixed;
+  left: 3rem;
+  top: 3rem;
+  font-weight: bold;
+  font-size: large;
 }
 
 [name="title"],
