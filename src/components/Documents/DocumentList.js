@@ -1,6 +1,6 @@
 import { push } from "../../utils/router.js";
 
-export default function DocumentList({ $target, initialState, onClick, onDelete }) {
+export default function DocumentList({ $target, initialState, onCreate, onDelete }) {
   const $documentList = document.createElement("div");
 
   $documentList.className = "document-list";
@@ -22,10 +22,12 @@ export default function DocumentList({ $target, initialState, onClick, onDelete 
         ${documentList
           .map((doc) => {
             return `<li class="item" data-id=${doc.id}> 
-            <span name="item-content"> ${doc.title} </span> 
-            <button name="addBtn" > + </button> 
-            <button name="deleteBtn"> - </button>
-          </li>
+              <span name="item-content"> ${doc.title.trim() === "" ? "제목 없음" : doc.title} </span>
+              <div data-group-id=${doc.id} class="button-group"">
+                <button name="addButton"> + </button> 
+                <button name="deleteButton"> - </button>
+              </div>
+            </li>
               ${doc.documents && doc.documents.length > 0 ? this.setDepth(doc.documents, !this.state.selectedDocument.has(`${doc.id}`)) : ""}
             `;
           })
@@ -37,10 +39,11 @@ export default function DocumentList({ $target, initialState, onClick, onDelete 
 
   this.render = () => {
     $documentList.innerHTML = "";
-    if (this.state.document.length > 0) {
+    if (this.state.document && this.state.document.length > 0) {
       $documentList.innerHTML = this.setDepth(this.state.document) + `<button name="addButton" id="newPage"> 새 페이지 생성 </button>`;
     } else {
       $documentList.innerHTML = `
+        <span id="emptyPage"> 페이지가 없습니다 :( </span>
         <button name="addButton" id="newPage"> 새 페이지 생성 </button>
       `;
     }
@@ -55,7 +58,7 @@ export default function DocumentList({ $target, initialState, onClick, onDelete 
     if (target.tagName === "BUTTON") {
       if (target.name === "addButton") {
         this.setState({ selectedDocument: this.state.selectedDocument.add(id) });
-        onClick({ parent: id || null, title: Untitle });
+        onCreate({ parent: id || null, title: Untitle });
       } else if (target.name === "deleteButton") onDelete({ id });
     } else if (target.getAttribute("name") === "item-content") {
       const selectedDocument = this.state.selectedDocument;

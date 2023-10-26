@@ -15,6 +15,10 @@ export default function App({ $target }) {
   });
 
   this.route = async () => {
+    const { pathname } = window.location;
+
+    documentBox.setState();
+
     if (pathname === "/") editorBox.setState();
     else if (pathname.indexOf("/documents/") === 0) {
       const [, , documentId] = pathname.split("/");

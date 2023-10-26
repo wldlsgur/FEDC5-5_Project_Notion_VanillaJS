@@ -1,4 +1,5 @@
 import { request } from "../../utils/request.js";
+import { push } from "../../utils/router.js";
 import DocumentList from "./DocumentList.js";
 
 export default function DocumentBox({ $target }) {
@@ -8,9 +9,9 @@ export default function DocumentBox({ $target }) {
 
   const documentList = new DocumentList({
     $target: $documentBox,
-    initialState: [],
+    initialState: { document: [], selectedDocument: new Set() },
 
-    onClick: async ({ parent, title }) => {
+    onCreate: async ({ parent, title }) => {
       await request("/documents", {
         method: "POST",
         body: JSON.stringify({ parent, title }),
@@ -22,12 +23,12 @@ export default function DocumentBox({ $target }) {
       await request(`/documents/${id}`, {
         method: "DELETE",
       });
-      this.setState();
+      push("/");
     },
   });
 
   this.setState = async () => {
     const documents = await request("/documents");
-    documentList.setState({ documents });
+    documentList.setState({ document: documents });
   };
 }
