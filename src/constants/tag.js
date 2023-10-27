@@ -4,7 +4,7 @@ export const TAG = {
   BUTTON: "button",
   NAV: "nav",
   IMG: "img",
-  P: "P",
+  P: "p",
   SPAN: "span",
   UL: "ul",
   LI: "li",
