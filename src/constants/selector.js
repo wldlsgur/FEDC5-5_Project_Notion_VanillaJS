@@ -1,5 +1,5 @@
 export const SELECTOR = {
-  ROOT: "#app",
+  ROOT: "app",
   SIDEBAR: "side-bar",
   HEADER: {
     PROFILE: "profile-header",
