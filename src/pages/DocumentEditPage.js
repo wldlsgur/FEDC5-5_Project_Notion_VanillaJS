@@ -53,6 +53,7 @@ export default function DocumentEditPage({ $target, updateAllDocuments }) {
     this.state = nextState;
     $editor.setState(this.state);
     $linkedDocumentList.setState(this.state.documents);
+
     $editPage.style.display = "block";
   };
 }
