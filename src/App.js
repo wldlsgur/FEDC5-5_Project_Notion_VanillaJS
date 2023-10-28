@@ -1,10 +1,10 @@
-import SideBar from "./src/components/Sidebar.js";
-import { SELECTOR } from "./src/constants/selector.js";
-import DocumentEditPage from "./src/pages/DocumentEditPage.js";
-import { PATH } from "./src/routes/path.js";
-import { initRouter, navigate } from "./src/routes/router.js";
-import { getAllDocuments } from "./src/service/documents.js";
-import { $ } from "./src/utils/dom.js";
+import SideBar from "./components/Sidebar.js";
+import { SELECTOR } from "./constants/selector.js";
+import DocumentEditPage from "./pages/DocumentEditPage.js";
+import { PATH } from "./routes/path.js";
+import { initRouter, navigate } from "./routes/router.js";
+import { getAllDocuments } from "./service/documents.js";
+import { $ } from "./utils/dom.js";
 
 export default function App({ $target }) {
   const $sideBar = new SideBar({
