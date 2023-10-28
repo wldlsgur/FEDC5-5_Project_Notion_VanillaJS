@@ -1,4 +1,4 @@
-import SideBar from "./components/Sidebar.js";
+import SideBar from "./components/SideBar.js";
 import { SELECTOR } from "./constants/selector.js";
 import DocumentEditPage from "./pages/DocumentEditPage.js";
 import { PATH } from "./routes/path.js";
