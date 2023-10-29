@@ -20,7 +20,7 @@ export default function DocumentEditPage({ $target, updateAllDocuments }) {
     updateAllDocuments();
 
     notionStorage.removeItem();
-  }, 500);
+  });
 
   const $editPage = createCustomElement({
     tag: TAG.SECTION,
