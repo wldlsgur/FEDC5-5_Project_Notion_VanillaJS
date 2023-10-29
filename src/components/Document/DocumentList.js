@@ -61,8 +61,11 @@ export default function DocumentList({ $target, state, navigateToDocument }) {
     const buttonId = $button.id;
 
     if (buttonId === SELECTOR.DOCUMENT.EXPAND_BTN) {
-      const $documentTree = event.target.closest("#document-tree");
-      const $childrenElement = $("#document-children", $documentTree);
+      const $documentTree = event.target.closest(`#${SELECTOR.DOCUMENT.TREE}`);
+      const $childrenElement = $(
+        `#${SELECTOR.DOCUMENT.CHIDREN}`,
+        $documentTree
+      );
 
       $childrenElement.classList.toggle("hide");
       $button.classList.toggle("rotate");
